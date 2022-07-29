@@ -4,7 +4,7 @@
 
 1. Clone the repository: 
 ```commandline
-git clone
+git clone https://github.com/YevhenKost/SemPrimsDetectionGA.git
 ```
 
 2. Install requirements

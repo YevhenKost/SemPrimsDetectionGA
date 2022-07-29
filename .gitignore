@@ -150,7 +150,9 @@ cmake-build-*/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
-
+.idea
+__pychache__
+venv
 # File-based project format
 *.iws
 

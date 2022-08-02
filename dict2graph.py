@@ -123,15 +123,15 @@ class Dict2Graph:
         # create edges
         for word in tqdm(self.word_dictionary):
             edges = list(self.get_from_word_edges(word=word))
-            encoded_edges = [encoding_dict[x] for x in edges]
-            vertex_connections[encoding_dict[word]] = encoded_edges
+            encoded_edges = [encoding_dict[x] for x in edges if x in encoding_dict]
+            vertex_connections[encoding_dict[word.lower()]] = encoded_edges
 
         return {"encoding_dict": encoding_dict, "graph": vertex_connections}
 
 
 def build_dict(args):
 
-    word_dictionary = json.load(args.word_dictionary_path)
+    word_dictionary = json.load(open(args.word_dictionary_path, "r"))
 
     processor = Dict2Graph(
         stanza_dir=args.stanza_dir,

@@ -41,7 +41,7 @@ with open(os.path.join(SAVE_DIR, "dictionary.json"), "w") as f:
 
 2. Convert dictionary to directed graph. It can be achieved via the command (paths are taken from the previous example):
 ```commandline
-python dict2graph.py --word_dictionary_path cat_but_directory/dictionary.json --stanza_dir LOADED_STANZA_MODELS/EN --stanza_lang en --stop_words_lang english --save_dir cat_but_directory/ --drop_self_cycles true --lemm_always true
+python dict2graph.py --word_dictionary_path cat_but_directory/dictionary.json --stanza_dir LOADED_STANZA_MODELS/en --stanza_lang en --stop_words_lang english --save_dir cat_but_directory/ --drop_self_cycles true --lemm_always false
 ```
 
 The arguments required:

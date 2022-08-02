@@ -64,6 +64,7 @@ python dict2graph.py -h
 ```commandline
 python sp_generation.py --load_dir cat_but_directory/ --N 1000 --n_cores 12 --seed 2
 ```
+Note, that it could take a while. For example, for a wordnet dictionary the generation of 1,000 SP lists took around a week with multiprocessing.
 The command execution will save in the --load_dir a generated lists in the following format and filename:
 ```python
 

@@ -111,7 +111,7 @@ python page_rank.py -h
 
 5. Run algorithm
 ```commandline
-python run.py --load_dir cat_but_directory/graph.json --cands_path cat_but_directory/candidates_1000_random2.json --n_threads 8 --val_prank_fill -1.0 --pop_size 100 --card_diff 50 --card_upper 2800 --save_dir GA_fit_model
+python run.py --load_dir cat_but_directory/ --cands_path cat_but_directory/candidates_1000_random2.json --n_threads 8 --val_prank_fill -1.0 --pop_size 100 --card_diff 50 --card_upper 2800 --save_dir GA_fit_model
 ```
 
 Algorithm results will be saved to save_dir. See [https://pymoo.org/interface/result.html](https://pymoo.org/interface/result.html).

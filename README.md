@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 3. Fill the configs
    1. Pagerank model fitting parameters ([conf/params_pagerank.json](conf/params_pagerank.json)). The parameters description can be found via the following link: [PageRank](https://scikit-network.readthedocs.io/en/latest/reference/ranking.html)
-   2. Word Vectorization paths and savenames ([conf/vectorization_configs.py](conf/vectorization_configs.py)). For each vectorizer provide required model paths on your local machine.
+   2. Word Vectorization paths and save names ([conf/vectorization_configs.py](conf/vectorization_configs.py)). For each vectorizer provide required model paths on your local machine.
 
 # Usage
 1. Prepare the dictionary in a following format and save to json file. Making a specific directory for the dictionary to store all the results is suggested. For example: 
@@ -78,7 +78,7 @@ filename = f"candidates_{str(N)}_random{str(seed)}.json" # N and seed are taken 
 
 
 The arguments required: 
-   * --load_dir: path to directory, which contains <i>graph.json<\i> file (generated on previous step). The generated SP lists will be saved here.
+   * --load_dir: path to directory, which contains <i>graph.json</i> file (generated on previous step). The generated SP lists will be saved here.
    * --N: int, number of SP lists to generate (there is no gurantee that they will be all unqiue).
    * --n_cores: int, how many cores to use during multiprocessing.
    * --seed: int, fix random seed.
@@ -98,7 +98,7 @@ python page_rank.py --load_dir cat_but_directory/ --fit_params_path conf/params_
 The fitted model will be saved to <i>--graph_path</i>.
 
 The arguments required:
-   * --load_dir: path to directory, which contains <i>graph.json<\i> file (generated on the first step). In this directory the trained pagerank model will be saved.
+   * --load_dir: path to directory, which contains <i>graph.json</i> file (generated on the first step). In this directory the trained pagerank model will be saved.
    * --fit_params_path: path to json file with pagerank parameters. See [conf/params_pagerank.json](conf/params_pagerank.json)
 
 <br>
@@ -119,7 +119,7 @@ The decoded results will be stored in save_dir/sp_wordlists/.
 
 <br>
 The arguments required:
-   * --load_dir: path to directory, which contains <i>graph.json, encoding_dict.json<\i> and <i>pagerank.pickle<\i> files (generated on previous steps).
+   * --load_dir: path to directory, which contains <i>graph.json, encoding_dict.json</i> and <i>pagerank.pickle</i> files (generated on previous steps).
    * --cands_path: path to json file with generated lists of Sem.Prims. (see Section 3.)
    * --chp_path: path to .npy checkpoint (if you want to continue training). After the model training this checkpoint will be saved in the save_dir
    * --n_threads: int, number of cores to use for multiprocessing
@@ -143,14 +143,14 @@ Create a dir, where each word list should be in a text file with newline separat
 2. Fill up the preprocessing configs
 Before that fill up the [conf/vectorization_configs.py](conf/vectorization_configs.py) and [word_preprocessing_utils.py](word_preprocessing_utils.py) files.
 [word_preprocessing_utils.py](word_preprocessing_utils.py) supports preprocessing for English, Spanish and Ukrainian at the moment, but it is possible to add new classes for other langs.
-In [conf/vectorization_configs.py](conf/vectorization_configs.py) fill up the stemm-lemm fields with the suitable classes.
+In [conf/vectorization_configs.py](conf/vectorization_configs.py) fill up the stemming/lemmatization fields with the suitable classes.
 
 3. Vectorize target word lists
 ```commandline
 python vectorize_words.py --lists_dir wordlists/ --save_dir wordlists/embeddings/
 ```
 The arguments required:
-   * --lists_dir: path to directory, which containes word lists (see Section 1).
+   * --lists_dir: path to directory, which contains word lists (see Section 1).
    * --save_dir: path, where the embeddings should be saved. Will generate a directory for each wordlist with the same name as file. In each dir the embeddings in .npy format will be saved.
 
 4. Vectorize obtained word lists (see Section 5 of Usage)

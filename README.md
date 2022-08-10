@@ -92,10 +92,10 @@ python sp_generation.py -h
 
 4. Fit PageRank model
 ```commandline
-python page_rank.py --graph_path cat_but_directory/ --fit_params_path conf/params_pagerank.json
+python page_rank.py --load_dir cat_but_directory/ --fit_params_path conf/params_pagerank.json
 ```
 
-The fitted model will be saved to <i>--graph_path<\i>.
+The fitted model will be saved to <i>--graph_path</i>.
 
 The arguments required:
    * --load_dir: path to directory, which contains <i>graph.json<\i> file (generated on the first step). In this directory the trained pagerank model will be saved.

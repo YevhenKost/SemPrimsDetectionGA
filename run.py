@@ -105,7 +105,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='GA Semantic Primitives Optim., Binary Subset Selection')
 
-    parser.add_argument('--load_dir', type=str, default="wordnet_graph_StanzaLemm_SSCDefsDrop/graph.json",
+    parser.add_argument('--load_dir', type=str, default="wordnet_graph_StanzaLemm_SSCDefsDrop/",
                         help='path to dir, which contains graph.json,encoding_dict.json and pagerank.pickle files')
     parser.add_argument('--chp_path', type=str, default="",
                         help='path to checkpoint to continue from')

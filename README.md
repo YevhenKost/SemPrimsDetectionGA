@@ -111,7 +111,7 @@ python page_rank.py -h
 
 5. Run algorithm
 ```commandline
-python run.py --load_dir cat_but_directory/ --cands_path cat_but_directory/candidates_1000_random2.json --n_threads 8 --val_prank_fill -1.0 --pop_size 100 --card_diff 50 --card_upper 2800 --save_dir GA_fit_model
+python run.py --load_dir cat_but_directory/ --n_threads 8 --val_prank_fill -1.0 --pop_size 100 --card_diff 50 --card_upper 2800 --save_dir GA_fit_model
 ```
 
 Algorithm results will be saved to save_dir. See [https://pymoo.org/interface/result.html](https://pymoo.org/interface/result.html).
@@ -120,7 +120,6 @@ The decoded results will be stored in save_dir/sp_wordlists/.
 <br>
 The arguments required:
    * --load_dir: path to directory, which contains <i>graph.json, encoding_dict.json</i> and <i>pagerank.pickle</i> files (generated on previous steps).
-   * --cands_path: path to json file with generated lists of Sem.Prims. (see Section 3.)
    * --chp_path: path to .npy checkpoint (if you want to continue training). After the model training this checkpoint will be saved in the save_dir
    * --n_threads: int, number of cores to use for multiprocessing
    * --val_prank_fill: negative float, value to use to return for mean pagerank objective function if the cycle is still detected in the graph.

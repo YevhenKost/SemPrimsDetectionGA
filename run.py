@@ -124,7 +124,7 @@ if __name__ == '__main__':
                         help="Cardinality upper bound")
     parser.add_argument('--max_mutate', type=int, default=60,
                         help="Maximum number of elements to mutate per population")
-    parser.add_argument('--min_mutate', type=int, default=60,
+    parser.add_argument('--min_mutate', type=int, default=0,
                         help="Minimum number of elements to mutate per population")
     parser.add_argument('--n_max_gen', type=int, default=30,
                         help="Maximum number of iterations to fit algorithm")

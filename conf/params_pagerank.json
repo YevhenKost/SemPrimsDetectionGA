@@ -2,5 +2,5 @@
   "damping_factor": 0.85,
   "solver": "piteration",
   "n_iter": 10,
-  "tol": 1e-06,
+  "tol": 1e-06
 }

@@ -126,6 +126,8 @@ if __name__ == '__main__':
                         help="Maximum number of elements to mutate per population")
     parser.add_argument('--min_mutate', type=int, default=60,
                         help="Minimum number of elements to mutate per population")
+    parser.add_argument('--n_max_gen', type=int, default=30,
+                        help="Maximum number of iterations to fit algorithm")
     parser.add_argument('--save_dir', type=str, default="GA_fitted",
                         help="dir to save results")
 

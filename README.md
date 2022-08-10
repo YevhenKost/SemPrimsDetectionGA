@@ -127,6 +127,8 @@ The arguments required:
    * --pop_size: int, population size (see [here](https://pymoo.org/algorithms/soo/ga.html#nb-ga))
    * --card_diff: int, maximum possible cardinality deviation (constraint function: f(X) = (X - card_mean) ** 2 <= card_diff).
    * --card_mean: int, mean cardinality for the constraint (constraint function: f(X) = (X - card_mean) ** 2 <= card_diff).
+   * --max_mutate: int, maximum number of elements to mutate per population. Default: 60.
+   * --min_mutate: int, minimum number of elements to mutate per population. Default: 0.
    * --save_dir: path, where training args, checkpoint and results will be stored.
 
 For more details see:

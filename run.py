@@ -122,6 +122,10 @@ if __name__ == '__main__':
                         help="Cardinality max difference")
     parser.add_argument('--card_mean', type=int, default=2800,
                         help="Cardinality upper bound")
+    parser.add_argument('--max_mutate', type=int, default=60,
+                        help="Maximum number of elements to mutate per population")
+    parser.add_argument('--min_mutate', type=int, default=60,
+                        help="Minimum number of elements to mutate per population")
     parser.add_argument('--save_dir', type=str, default="GA_fitted",
                         help="dir to save results")
 

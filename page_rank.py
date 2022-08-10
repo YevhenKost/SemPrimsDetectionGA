@@ -91,8 +91,6 @@ def fit_prank(args):
 	params = json.load(open(args.fit_params_path, "r"))
 	prank_model = DictPageRank(graph=graph, params=params)
 
-	os.makedirs(args.save_dir, exist_ok=True)
-
 	save_path_prank_model = os.path.join(args.load_dir, "pagerank.pickle")
 	dump(prank_model, save_path_prank_model)
 

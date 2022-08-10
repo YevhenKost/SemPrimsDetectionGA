@@ -115,7 +115,7 @@ class BinarySubsetSelectionOptimizationFunctions:
 
         return is_cycle
 
-    def get_constr_eq_list(self, v: np.arra) -> List[float]:
+    def get_constr_eq_list(self, v: np.array) -> List[float]:
         """
         Get contraints functions list that should equal 0
         :param v: np.array of bool values, population to check
@@ -147,7 +147,7 @@ class BinarySubsetSelectionSemanticPrimitivesProblem(ElementwiseProblem):
             func_eval=func_eval
         )
         self.optim_functions = optim_functions
-        self.n_max = self.optim_functions.n_max
+        self.n_max = self.optim_functions.n_vals
 
     def _evaluate(self, x: np.array, out, *args, **kwargs):
         """see https://pymoo.org/interface/problem.html"""

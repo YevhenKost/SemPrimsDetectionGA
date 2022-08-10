@@ -39,7 +39,7 @@ def fit_ga(args):
         os.path.join(args.load_dir, "pagerank.pickle")
     )
 
-    sp_gen_lists = json.load(open(args.sp_gen_lists, "r"))
+    sp_gen_lists = json.load(open(args.sp_gen_lists_path, "r"))
     sp_gen_unique_ids = get_sp_gen_unique_ids(sp_gen_lists)
 
     optim_functions = BinarySubsetSelectionOptimizationFunctions(
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                         help='path to dir, which contains graph.json,encoding_dict.json and pagerank.pickle files')
     parser.add_argument('--chp_path', type=str, default="",
                         help='path to checkpoint to continue from')
-    parser.add_argument('--cands_path', type=str,
+    parser.add_argument('--sp_gen_lists_path', type=str,
                         default="wordnet_graph_StanzaLemm_SSCDefsDrop/wordnet_graph_StanzaLemm_SSCDefsDrop_1000_candidates_random2.json",
                         help='path to generated Sem.Prims. json file')
     parser.add_argument('--n_threads', type=int, default=5,

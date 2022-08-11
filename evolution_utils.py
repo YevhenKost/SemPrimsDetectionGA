@@ -88,7 +88,10 @@ class BinaryMutationFromProbs(Mutation):
             num_true_change = np.random.randint(self.min_mutate, self.max_mutate)
 
             is_true = np.where(X[i, :])[0]
-            X[i, np.random.choice(is_false, size=num_false_change)] = True
-            X[i, np.random.choice(is_true, size=num_true_change)] = False
+
+            if len(is_false):
+                X[i, np.random.choice(is_false, size=num_false_change)] = True
+            if len(is_true):
+                X[i, np.random.choice(is_true, size=num_true_change)] = False
 
         return X

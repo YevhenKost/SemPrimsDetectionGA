@@ -36,3 +36,16 @@ class EnglishStemsLemms(BaseStemsLemms):
         self.lemmatizers = [
             WordNetLemmatizer()
         ]
+
+class SpanishStemsLemms(BaseStemsLemms):
+    def __init__(self):
+        """
+        Spanish Stemmers and Lemmatizers
+        Will be generated one by one
+        """
+        super(SpanishStemsLemms, self).__init__()
+
+        self.stemmers = [
+            SnowballStemmer("spanish")
+        ]
+        self.lemmatizers = []

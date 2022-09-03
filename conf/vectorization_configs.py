@@ -1,12 +1,11 @@
 from vectorization_utils import FastTextWordVectorizer, Word2VecWordVectorizer, BertWordVectorizer
-from word_preprocessing_utils import EnglishStemsLemms
+from word_preprocessing_utils import EnglishStemsLemms, SpanishStemsLemms
 
 CONFIGS = [
         {
             "vectorizer": FastTextWordVectorizer,
             "params":{
-                "model_path": "/media/yevhen/HDD1/DataSets/fasstText_models/cc.en.300.bin",
-                "pad_value": 0
+                "model_path": "fastText_models/cc.en.300.bin",
             },
             "save_name": "ft",
             "output_filenames":  ["ft.npy"]
@@ -14,7 +13,7 @@ CONFIGS = [
         {
             "vectorizer": Word2VecWordVectorizer,
             "params": {
-                "embedding_path": "/media/yevhen/HDD1/DataSets/word2vec/glove.6B/glove.6B.300d.txt",
+                "embedding_path": "word2vec_models/glove.6B/glove.6B.300d.txt",
                 "word_lems_stems": EnglishStemsLemms(),
                 "eps": 1e-5
             },
@@ -24,7 +23,7 @@ CONFIGS = [
         {
             "vectorizer": Word2VecWordVectorizer,
             "params": {
-                "embedding_path": "/media/yevhen/HDD1/DataSets/word2vec/f47355dd5b267bd10f08671e513790690233c76a9ffd73aa915d78f894a8912e/glove.840B.300d.txt",
+                "embedding_path": "word2vec_models/glove.840B.300d.txt",
                 "word_lems_stems": EnglishStemsLemms(),
                 "eps": 1e-5
             },
@@ -34,7 +33,7 @@ CONFIGS = [
         {
             "vectorizer": Word2VecWordVectorizer,
             "params": {
-                "embedding_path": "/media/yevhen/HDD1/DataSets/word2vec/glove.42B.300d.txt",
+                "embedding_path": "word2vec_models/glove.42B.300d.txt",
                 "word_lems_stems": EnglishStemsLemms(),
                 "eps": 1e-5
             },
@@ -44,7 +43,7 @@ CONFIGS = [
         {
             "vectorizer": BertWordVectorizer,
             "params": {
-                "pretrained_name": "/media/yevhen/HDD1/huggingface_models/bert-base-uncased",
+                "pretrained_name": "huggingface_models/bert-base-uncased",
                 "max_len": 30,
                 "device": 'cpu'
             },

@@ -42,13 +42,19 @@ def run_vectorization(args):
 
     for c in CONFIGS:
         vectorizer = c["vectorizer"](**c["params"])
-        for d in os.listdir(args.lists_dir):
-            word_list = read_wordlist(os.path.join(args.lists_dir, d))
-            os.makedirs(os.path.join(args.lists_dir, d), exist_ok=True)
-            save_wordlist_representations(
-                save_dir=os.path.join(args.save_dir, d), word_list=word_list,
-                vectorizer=vectorizer, save_name=c["save_name"]
-            )
+
+        for wordlist_file in os.listdir(args.lists_dir):
+            file_path = os.path.join(args.lists_dir, wordlist_file)
+            if not os.path.isdir(file_path):
+                word_list = read_wordlist(file_path)
+                embedd_save_path = os.path.join(args.save_dir, wordlist_file)
+                os.makedirs(embedd_save_path, exist_ok=True)
+                save_wordlist_representations(
+                    save_dir=embedd_save_path,
+                    word_list=word_list,
+                    vectorizer=vectorizer,
+                    save_name=c["save_name"]
+                )
 
 
 if __name__ == '__main__':
@@ -56,8 +62,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Word Lists vectorization')
 
     parser.add_argument('--lists_dir', type=str,
-                        default="wordlists",
+                        default="wordlists/",
                         help='path to dir with word lists. Each list should be a file with words new line separated')
     parser.add_argument('--save_dir', type=str,
                         default="wordlists/embeddings/",
                         help='path to where save embeddings. In the dir the dir for every word list will be created with corresponding embedding files')
+    args = parser.parse_args()
+    run_vectorization(args)

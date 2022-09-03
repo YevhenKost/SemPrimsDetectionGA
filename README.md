@@ -140,7 +140,7 @@ python run.py -h
 
 # Testing
 
-1. Prepare word lists
+1. Prepare word lists <br>
 Create a dir, where each word list should be in a text file with newline separated word
 
 2. Fill up the preprocessing configs

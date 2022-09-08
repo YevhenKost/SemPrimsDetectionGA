@@ -52,7 +52,8 @@ The arguments required:
    * --save_dir: path to a directory, where the grapg dict files will be stored: word encoding dictionary and graph edges dictionary in json formats. Suggested approach is to use the same directory as for the graph.
    * --drop_self_cycles: boolean, whether to delete the definitions, which have a word they suppose to define. For example, for the word "bark" the definition "to bark" will not be used during graph building.
    * --lemm_always: boolean, whether to use lemmatization only if the word is not in dictionary vocabulary or always.
-
+   * --vocabulary_list_path (Optional): str, path to json with vocabulary to use for graph building. If None, the keys from file from word_dictionary_path will be used.
+   * --lemm_vocabulary (Optional): boolean, Ignored if vocabulary_list_path is empty. Whether to lemmatize words in vocabulary_list. The duplicates will be removed.
 
 For more details: 
 

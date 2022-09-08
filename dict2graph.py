@@ -5,7 +5,7 @@ from stop_words import get_stop_words, StopWordError
 import os
 
 import stanza
-from typing import Dict, Any, Set
+from typing import Dict, Any, Set, List
 
 
 class Dict2Graph:
@@ -43,6 +43,12 @@ class Dict2Graph:
         self.lemm_always = lemm_always
         self.stop_words_lang = stop_words_lang
 
+    def _get_lemma(self, word):
+        doc = self.ppl(word)
+        lemmas = [word.lemma for sent in doc.sentences for word in sent.words]
+        word_lemma = lemmas[0]
+        return word_lemma
+
 
     def get_filtered_set_tokens(self, definition: str) -> Set[str]:
         """
@@ -75,7 +81,7 @@ class Dict2Graph:
         Building encoding dict for the given vocabulary of self.word_dictionary
         :return: {word: idx}
         """
-        return {k.lower():v for v,k in enumerate(list(self.word_dictionary.keys()))}
+        return {k.lower():v for v,k in enumerate(self.vocabulary_list)}
 
     def get_from_word_edges(self, word: str) -> Set[str]:
         """
@@ -98,11 +104,14 @@ class Dict2Graph:
 
         return all_edges
 
-    def build_graph(self, encoding_dict: Dict[str, int]=None) -> Dict[str, Any]:
+    def build_graph(self,
+                    vocabulary_list: List[str]=None,
+                    lemm_vocabulary: bool=False
+                    ) -> Dict[str, Any]:
         """
         Building a graph of dictionary
-        :param encoding_dict: dict or None. Precalcuated encoding dict {word: id}. Of None, will be built based on the
-        provided dict self.word_dictionary
+        :param vocabulary_list: list of str, list of vocabulary to use. If not provided, vocabulary will be built from keys of word_dictionary.
+        :param lemm_vocabulary: bool, ignored if vocabulary_list = None. Whether to lemmatize words in vocabulary_list. The duplicates will be removed
         :return: dict with fields:
             encoding_dict: dict,  encoding dict that was either provided or built
             graph: dict, {word_id: [wrod_id, word_id, ...]}, graph edges
@@ -113,11 +122,18 @@ class Dict2Graph:
             sw = get_stop_words(self.stop_words_lang)
         except StopWordError:
             sw = []
-        self.word_dictionary = {k:v for k,v in self.word_dictionary.items() if k.lower() not in sw}
 
-        # build encoding dict if necessary
-        if not encoding_dict:
-            encoding_dict = self.get_encoding_dict()
+        self.word_dictionary = {k: v for k, v in self.word_dictionary.items() if k.lower() not in sw}
+        if vocabulary_list:
+            self.vocabulary_list = vocabulary_list
+            if lemm_vocabulary:
+                self.vocabulary_list = [self._get_lemma(word) for word in self.vocabulary_list]
+        else:
+            self.vocabulary_list = list(self.word_dictionary.keys())
+
+
+
+        encoding_dict = self.get_encoding_dict()
         vertex_connections = {}
 
         # create edges
@@ -133,6 +149,11 @@ def build_dict(args):
 
     word_dictionary = json.load(open(args.word_dictionary_path, "r"))
 
+    if args.vocabulary_list_path:
+        vocabulary_list = json.load(open(args.vocabulary_list_path, "r"))
+    else:
+        vocabulary_list = None
+
     processor = Dict2Graph(
         stanza_dir=args.stanza_dir,
         stanza_lang=args.stanza_lang,
@@ -142,7 +163,7 @@ def build_dict(args):
         lemm_always=args.lemm_always
     )
 
-    output_dict = processor.build_graph()
+    output_dict = processor.build_graph(vocabulary_list=vocabulary_list, lemm_vocabulary=args.lemm_vocabulary)
 
     os.makedirs(args.save_dir, exist_ok=True)
 
@@ -178,6 +199,11 @@ if __name__ == '__main__':
     parser.add_argument('--lemm_always', type=bool,
                         default=True,
                         help='Whether to always lemmatize words in definitions or only when it is not found in dict')
-
+    parser.add_argument('--vocabulary_list_path', type=str,
+                        default="",
+                        help='path to json with vocabulary to use for graph building. If None, the keys from file from word_dictionary_path will be used')
+    parser.add_argument('--lemm_vocabulary', type=bool,
+                        default=True,
+                        help='Ignored if vocabulary_list_path is empty. Whether to lemmatize words in vocabulary_list. The duplicates will be removed')
     args = parser.parse_args()
     build_dict(args)

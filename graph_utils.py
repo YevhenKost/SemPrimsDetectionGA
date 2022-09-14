@@ -115,3 +115,14 @@ def load_graph_dict(json_graph_path: str) -> Dict[int,List[int]]:
     )
     graph_dict = {int(k): v for k, v in graph_dict.items()}
     return graph_dict
+
+def get_num_vertices(json_enc_dict_path: str) -> int:
+
+    """
+    Get maximum index from encoding dict
+    :param json_enc_dict_path: str, path to encoding dict ({word: word_id})
+    :return: int, num of vertices
+    """
+
+    enc_dict = json.load(open(json_enc_dict_path, "r"))
+    return max(list(enc_dict.values()))

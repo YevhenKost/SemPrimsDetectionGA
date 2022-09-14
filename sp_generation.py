@@ -3,19 +3,20 @@ from typing import Dict, List, Union, Tuple
 import random, json, os
 from tqdm import tqdm
 from multiprocessing import Pool
-from graph_utils import load_graph_dict
+from graph_utils import load_graph_dict, get_num_vertices
 
 class PrimitivesCandidatesGenerator:
     """
     Class for Permutation-based Generation of List of Semantic Primitives
     """
-    def __init__(self, graph: Dict[int, List]) -> None:
+    def __init__(self, graph: Dict[int, List], num_vertices: int) -> None:
         """
         :param graph: dict, edges dict: {vertex: [destination_vertex, destination_vertex, ...]}
+        :param num_vertices: int, number of vertices in graph
         """
 
         self.graph = graph
-        self.num_v = max(list(graph.keys()))
+        self.num_v = num_vertices
 
     def _randomize_order(self, seq: Union[List, Tuple]) -> Union[List, Tuple]:
         """Outplace order randomization"""
@@ -68,8 +69,12 @@ def save_SP_lists(args):
     random.seed(args.seed)
 
     graph = load_graph_dict(os.path.join(args.load_dir, "graph.json"))
+    num_vertices = get_num_vertices(os.path.join(args.load_dir, "encoding_dict.json"))
 
-    sp_generator = PrimitivesCandidatesGenerator(graph)
+    sp_generator = PrimitivesCandidatesGenerator(
+        graph=graph,
+        num_vertices=num_vertices
+    )
 
     with Pool(args.n_cores) as p:
         output = list(tqdm(p.imap(sp_generator.generate_list, range(args.N)), total=args.N))
@@ -83,7 +88,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='SP prob calc')
 
-    parser.add_argument('--load_dir', type=str, default="wordnet_graph_StanzaLemm_SSCDefsDrop/",
+    parser.add_argument('--load_dir', type=str, default="graph_dir/",
                         help='path to dir where the results and graph are stored')
     parser.add_argument('--N', type=int,
                         default=1000,

@@ -2,7 +2,7 @@ from optimization import BinarySubsetSelectionOptimizationFunctions, BinarySubse
 from page_rank import DictPageRank
 from algorithm_utils import BinarySubsetSelectionGeneticAlgorithm
 from minimization_utils import AlgorithmMinimizer
-from graph_utils import load_graph_dict
+from graph_utils import load_graph_dict, get_num_vertices
 from postprocessing_utils import PopulationDecoder, load_decoding_dict
 
 from multiprocessing.pool import ThreadPool
@@ -33,7 +33,9 @@ def fit_ga(args):
     graph_dict = load_graph_dict(
         json_graph_path=os.path.join(args.load_dir, "graph.json")
     )
-    n_vals = max(graph_dict.keys())
+    n_vals = get_num_vertices(
+        json_enc_dict_path=os.path.join(args.load_dir, "encoding_dict.json")
+    )
 
     optim_pagerank = load(
         os.path.join(args.load_dir, "pagerank.pickle")

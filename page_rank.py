@@ -88,6 +88,8 @@ class DictPageRank:
 
 def fit_prank(args):
 	graph = load_graph_dict(os.path.join(args.load_dir, "graph.json"))
+	graph = {int(k):v for k,v in graph.items()}
+
 	params = json.load(open(args.fit_params_path, "r"))
 	prank_model = DictPageRank(graph=graph, params=params)
 

@@ -123,10 +123,10 @@ The arguments required:
    * --load_dir: str, path to directory, which contains <i>graph.json, encoding_dict.json</i> and <i>pagerank.pickle</i> files (generated on previous steps).
    * --chp_path: str (optional), path to .npy checkpoint (if you want to continue training). After the model training this checkpoint will be saved in the save_dir. 
    * --n_threads: int, number of cores to use for multiprocessing.
-   # --sp_gen_lists_path: str, path to json file with stored generated SP lists (see step 3). 
+   * --sp_gen_lists_path: str, path to json file with stored generated SP lists (see step 3). 
    * --val_prank_fill: negative float, value to use to return for mean pagerank objective function if the cycle is still detected in the graph.
    * --pop_size: int, population size (see [here](https://pymoo.org/algorithms/soo/ga.html#nb-ga))
-   * --card_diff: int, maximum possible cardinality deviation (constraint function: f(X) = (X - card_mean) ** 2 <= card_diff).
+   * --card_diff: int, maximum possible cardinality deviation (constraint function: f(X) = (X - card_mean) ** 2 <= card_diff ** 2).
    * --card_mean: int, mean cardinality for the constraint (constraint function: f(X) = (X - card_mean) ** 2 <= card_diff).
    * --max_mutate: int, maximum number of elements to mutate per population. Default: 60.
    * --min_mutate: int, minimum number of elements to mutate per population. Default: 0.

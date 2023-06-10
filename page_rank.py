@@ -22,7 +22,7 @@ class DictPageRank:
 		# If there are missing vertexes in the graph, the adjustments should be made
 		# vertexes will be reordered so the algorithm could be fit
 		# On the inference step the decoding mechanism will be applied to output correct scores
-		num_vert = max(list(self.graph.keys()))
+		num_vert = max(list(self.graph.keys())) + 1
 		if list(range(num_vert)) == sorted(list(self.graph.keys())):
 			self.row2value = None
 		else:
